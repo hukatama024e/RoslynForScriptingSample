@@ -1,5 +1,6 @@
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
+using System;
 using System.IO;
 
 namespace RoslynForScriptingSample
@@ -21,6 +22,18 @@ namespace RoslynForScriptingSample
 
 			var script = CSharpScript.Create( File.ReadAllText( @"Script\setUsing.csx" ), optionSetting );
 			var scriptState = await script.RunAsync();
+		}
+
+		public static async void SetParameter()
+		{
+			var script = CSharpScript.Create( File.ReadAllText( @"Script\setParam.csx" ) );
+			var scriptState = await script.RunAsync();
+
+			var paramA = scriptState.GetVariable( "paramA" );
+			var paramB = scriptState.GetVariable( "paramB" );
+
+			Console.WriteLine( $"{paramA.Name}={paramA.Value}" );
+			Console.WriteLine( $"{paramB.Name}={paramB.Value}" );
 		}
 	}
 }
