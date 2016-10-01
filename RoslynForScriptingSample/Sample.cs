@@ -26,8 +26,8 @@ namespace RoslynForScriptingSample
 
 		public static async void SetParameter()
 		{
-			var script = CSharpScript.Create( File.ReadAllText( @"Script\setParam.csx" ) );
-			var scriptState = await script.RunAsync();
+			var script = CSharpScript.Create( File.ReadAllText( @"Script\setParam.csx" ), ScriptOptions.Default, typeof( AppInfo ) );
+			var scriptState = await script.RunAsync( new AppInfo { Version = "0.2.0" } );
 
 			var paramA = scriptState.GetVariable( "paramA" );
 			var paramB = scriptState.GetVariable( "paramB" );
