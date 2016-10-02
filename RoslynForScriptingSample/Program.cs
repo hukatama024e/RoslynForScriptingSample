@@ -8,7 +8,7 @@ namespace RoslynForScriptingSample
 		static void Main( string[] args )
 		{
 			try {
-				Sample.SetParameter();
+				Sample.SetParameterAsync().Wait();
 			}
 			catch( CompilationErrorException ex ) {
 				Console.WriteLine( "[Script Error]" );
