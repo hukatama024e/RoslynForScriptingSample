@@ -36,5 +36,17 @@ namespace RoslynForScriptingSample
 			Console.WriteLine( $"{paramA.Name}={paramA.Value}" );
 			Console.WriteLine( $"{paramB.Name}={paramB.Value}" );
 		}
+
+		public static async Task HookAsync()
+		{
+			var preHookScript = CSharpScript.Create( File.ReadAllText( @"Script\preHook.csx" ) );
+			var postHookScript = CSharpScript.Create( File.ReadAllText( @"Script\postHook.csx" ) );
+
+			Func<Task> mainProcess = async () => await Task.Run( () => Console.WriteLine( "Main Process!!" ) );
+
+			await preHookScript.RunAsync();
+			await mainProcess();
+			await postHookScript.RunAsync();
+		}
 	}
 }
