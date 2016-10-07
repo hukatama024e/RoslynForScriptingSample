@@ -48,5 +48,11 @@ namespace RoslynForScriptingSample
 			await mainProcess();
 			await postHookScript.RunAsync();
 		}
+
+		public static async Task UserApiAsync()
+		{
+			var script = CSharpScript.Create( File.ReadAllText( @"Script\UseApi.csx" ), ScriptOptions.Default, typeof( IApi ) );
+			var scriptState = await script.RunAsync( new UserApi() );
+		}
 	}
 }

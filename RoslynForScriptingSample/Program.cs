@@ -6,7 +6,7 @@ namespace RoslynForScriptingSample
 	{
 		static void Main( string[] args )
 		{
-			AsyncUtility.ExceptionHandleAsync( Sample.HookAsync ).Wait();
+			AsyncUtility.ExceptionHandleAsync( Sample.UserApiAsync ).Wait();
 			Console.ReadKey();
 		}
 	}
