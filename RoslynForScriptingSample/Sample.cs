@@ -39,14 +39,15 @@ namespace RoslynForScriptingSample
 
 		public static async Task HookAsync()
 		{
-			var preHookScript = CSharpScript.Create( File.ReadAllText( @"Script\preHook.csx" ) );
-			var postHookScript = CSharpScript.Create( File.ReadAllText( @"Script\postHook.csx" ) );
+			var hook = new Hook();
+			hook.EntryPreHook( @"Script\preHook.csx" );
+			hook.EntryPostHook( @"Script\postHook.csx" );
 
 			Func<Task> mainProcess = async () => await Task.Run( () => Console.WriteLine( "Main Process!!" ) );
 
-			await preHookScript.RunAsync();
+			await hook.InvokePreHook();
 			await mainProcess();
-			await postHookScript.RunAsync();
+			await hook.InvokePostHook();
 		}
 
 		public static async Task UserApiAsync()
